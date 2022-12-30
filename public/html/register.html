@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/register.css">
+    <title>OrderCall Register</title>
+</head>
+<body>
+    <form action="doJoin" method="POST" class="joinForm">                                                                                      
+        <h2>회원가입</h2>
+        <div class="textForm">
+            <input name="user_email" type="text" id="user_email" placeholder="이메일">
+        </div>
+        <div class="textForm">
+            <input name="user_ID" type="text" class="user_ID" placeholder="아이디">
+        </div>
+        <div class="textForm">
+            <input name="user_Password" type="password" id="user_Password" placeholder="비밀번호">
+        </div>
+        <div class="textForm">
+            <input name="Password_Check" type="password" id="Password_Check" placeholder="비밀번호 확인">
+        </div>
+
+        <input type="button" id="register" value="R E G I S T E R"/>
+        <div class="textform">
+            <h5 style="display: inline;">이미 계정이 있으신가요?</h5> <h5 style="color: blue; display: inline;"><a href="/">로그인하기</a></h5>
+        </div>
+    </form>
+
+    <script>
+        var register = document.getElementById('register');
+         register.addEventListener('click', function() {
+            var user_Password = document.getElementById('user_Password').value;
+            var Password_Check = document.getElementById('Password_Check').value;
+            if(user_Password.length < 7) {
+                alert("비밀번호는 7자리 이상이어야 합니다.");
+                return false;
+            }
+            if (user_Password != Password_Check) {
+                alert("비밀번호가 일치하지 않습니다.");
+                return false;
+            } else {
+                window.open("/verify")
+                return true;
+            }});
+        </script>
+    </form>
+</body>
+</html>
