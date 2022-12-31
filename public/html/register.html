@@ -4,6 +4,7 @@
     <link rel="icon" href="/picture/logo.png">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/register.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <title>OrderCall Register</title>
 </head>
 <body>
@@ -30,9 +31,11 @@
 
     <script> //todo: 아이디, 이메일 입력 확인
         var register = document.getElementById('register');
-         register.addEventListener('click', function() {
+        register.addEventListener('click', function() {
             var user_Password = document.getElementById('user_Password').value;
             var Password_Check = document.getElementById('Password_Check').value;
+            var user_ID = document.getElementsByClassName('user_ID')[0].value;
+            var user_email = document.getElementById('user_email').value;
             if(user_Password.length < 7) {
                 alert("비밀번호는 7자리 이상이어야 합니다.");
                 return false;
@@ -41,7 +44,15 @@
                 alert("비밀번호가 일치하지 않습니다.");
                 return false;
             } else {
-                window.open("/verify")
+                $.ajax(
+                    {
+                        url:`/api/cru?id=${user_ID}&pw=${user_Password}&email=${user_email}`,
+                        success: function(data){
+                            console.log(data)
+                            window.open("/verify")
+                        }
+                    }
+                )
                 return true;
             }});
         </script>

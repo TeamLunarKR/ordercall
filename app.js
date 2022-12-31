@@ -39,11 +39,17 @@ app.get('/api/cru', (req, res) => {
     var spawn = require('child_process').spawn;
     const result = spawn('py', ['./python-files/cru.py', req.query.id, req.query.pw, req.query.email]);
     result.stdout.on('data', function(data) {
-        console.log(data.toString())
         res.set('Content-Type', 'text/html');
         res.send(data.toString())
     })
 })
+
+
+
+app.get((req, res) => {
+    res.status(404).send('not found')
+})
+
 
 app.use(express.static('public'));
 
