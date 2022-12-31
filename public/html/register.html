@@ -48,7 +48,7 @@
                         url:`/api/cru?id=${user_ID}&pw=${user_Password}&email=${user_email}`,
                         success: function(data){
                             console.log(data)
-                            window.open("/verify")
+                            window.open("/verify?email="+user_email)
                         }
                     }
                 )
