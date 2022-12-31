@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/login.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <title>OrderCall Login</title>
 </head>
 <body>
@@ -19,5 +20,27 @@
             <h5 style="display: inline;">계정이 없으신가요?</h5> <h5 style="color: blue; display: inline;"><a href="/register">회원가입하기</a></h5>
         </div>
     </form>
+    <script>
+        var login = document.getElementById("login");
+        login.addEventListener('click', function(){
+            var userid = document.getElementsByClassName("user_ID")[0].value;
+            var userpw = document.getElementById("user_Password").value;
+            $.ajax(
+                    {
+                        url:`/api/login?id=${userid}&pw=${userpw}`,
+                        success: function(data){
+                            console.log(data)
+                            if(data){
+                                window.open('../')
+                            }
+                            else{
+                                alert("아이디 또는 비밀번호가 일치하지 않습니다.")
+                                return false
+                            }
+                        }
+                    }
+                )
+        })
+    </script>
 </body>
 </html>
