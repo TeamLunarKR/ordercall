@@ -1,0 +1,34 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    font-family:sans-serif;
+  
+  }
+  
+  body {
+    background-image:#34495e;
+  }
+  
+  .mailForm {
+    position:absolute;
+    height:400px;
+    background-color:#FFFFFF;
+    text-align:center;
+    top:60%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    border-radius: 15px;
+  }
+  
+  .mailForm h4 {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .textForm {
+    border-bottom: 2px solid #adadad;
+    margin: 50px;
+    padding: 10px 10px;
+  }
+  

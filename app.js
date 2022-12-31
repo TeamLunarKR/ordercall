@@ -19,6 +19,10 @@ app.get('/login', (req, res) => {
     res.sendFile(__dirname+'/public/html/login.html')
 })
 
+app.get((req, res) => {
+    res.status(404).send('not found')
+})
+
 // API PAGE CODES 
 
 // CPW == Check PassWord

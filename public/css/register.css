@@ -10,7 +10,7 @@ body {
   background-image:#34495e;
 }
 
-.joinForm {
+.loginForm {
   position:absolute;
   width:400px;
   height:400px;
@@ -23,7 +23,7 @@ body {
   border-radius: 15px;
 }
 
-.joinForm h2 {
+.loginForm h2 {
   text-align: center;
   margin: 30px;
 }

@@ -6,7 +6,7 @@
     <title>OrderCall Register</title>
 </head>
 <body>
-    <form action="doJoin" method="POST" class="joinForm">                                                                                      
+    <form action="doJoin" method="POST" class="loginForm">                                                                                      
         <h2>회원가입</h2>
         <div class="textForm">
             <input name="user_email" type="text" id="user_email" placeholder="이메일">
@@ -27,7 +27,7 @@
         </div>
     </form>
 
-    <script>
+    <script> //todo: 아이디, 이메일 입력 확인
         var register = document.getElementById('register');
          register.addEventListener('click', function() {
             var user_Password = document.getElementById('user_Password').value;
