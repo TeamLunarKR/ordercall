@@ -12,7 +12,6 @@ app.get('/register', (req, res) => {
 })
 
 app.get('/verify', (req, res) => {
-
     res.sendFile(__dirname+'/public/html/mailverify.html')
 })
 
@@ -39,7 +38,6 @@ app.get('/api/cru', (req, res) => {
     var spawn = require('child_process').spawn;
     const result = spawn('py', ['./python-files/cru.py', req.query.id, req.query.pw, req.query.email]);
     result.stdout.on('data', function(data) {
-        console.log(data.toString())
         res.set('Content-Type', 'text/html');
         res.send(data.toString())
     })

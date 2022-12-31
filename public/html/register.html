@@ -30,7 +30,7 @@
 
     <script> //todo: 아이디, 이메일 입력 확인
         var register = document.getElementById('register');
-         register.addEventListener('click', function() {
+        register.addEventListener('click', function() {
             var user_Password = document.getElementById('user_Password').value;
             var Password_Check = document.getElementById('Password_Check').value;
             var user_ID = document.getElementsByClassName('user_ID')[0].value;
@@ -47,7 +47,8 @@
                     {
                         url:`/api/cru?id=${user_ID}&pw=${user_Password}&email=${user_email}`,
                         success: function(data){
-                            window.open($`/verify`)
+                            console.log(data)
+                            window.open("/verify")
                         }
                     }
                 )
