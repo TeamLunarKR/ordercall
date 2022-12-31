@@ -1,21 +1,29 @@
 const express = require('express')
 const session = require('express-session')
 const nodemailer = require('nodemailer')
+const fileStore = require('session-file-store')(session); 
 require('dotenv').config();
 const app = express();
 app.use(session({
-    HttpOnly: true,
-    secure: false,
-    secret: process.env.SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 }
-}));
+    secret: 'secret key',	// 암호화
+    resave: false,	
+    saveUninitialized: true,	
+    cookie: {	
+      httpOnly: true,
+    },
+    store: new fileStore() // 세션 객체에 세션스토어를 적용
+  }));
 const port = 80
 
 // CLIENT PAGE CODES
 app.get('/', (req, res) => {
-    res.sendFile(__dirname+'/public/html/home.html')
+    if(req.session.is_logined){
+        res.send('logined')
+    }
+    else{
+        res.send('not logined')
+    }
+    
 })
 
 app.get('/register', (req, res) => {
@@ -53,6 +61,8 @@ app.get('/verify', (req, res) => {
 app.get('/login', (req, res) => {
     res.sendFile(__dirname+'/public/html/login.html')
 })
+
+
 
 app.get('/emailverify', (req,res) => {
     tk = req.query.token;
@@ -92,7 +102,30 @@ app.get('/api/cru', (req, res) => {
     })
 })
 
+app.get('/api/login', (req,res) => {
+    var uid = req.query.id;
+    var upw = req.query.pw;
 
+    var spawn = require('child_process').spawn;
+    const result = spawn('py', ['./python-files/cpw.py', uid, upw]);
+    result.stdout.on('data', function(data) {
+        console.log(1)
+        if(data){
+            req.session.is_logined=1;
+            res.send('1')
+        }
+        else{
+            res.send('0')
+        }
+    })
+}
+)
+
+app.get('/api/logout', (req,res) => {
+    if(req.session.is_logined){
+        req.session.is_logined=0
+    }
+})
 
 app.get((req, res) => {
     res.status(404).send('not found')
