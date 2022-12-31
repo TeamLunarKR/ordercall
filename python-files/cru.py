@@ -1,3 +1,4 @@
+
 import pymysql
 import sys
 id = sys.argv[1]
@@ -16,5 +17,4 @@ query = f'INSERT INTO `userinfo`(id,pw, email, emailverify, emailhash) values("{
 cur.execute(query)
 conn.commit()
 print(emailhash)
-
 
