@@ -1,6 +1,16 @@
 const express = require('express')
+const session = require('express-session')
 const nodemailer = require('nodemailer')
+require('dotenv').config();
 const app = express();
+app.use(session({
+    HttpOnly: true,
+    secure: false,
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 }
+}));
 const port = 80
 
 // CLIENT PAGE CODES
@@ -19,8 +29,8 @@ app.get('/verify', (req, res) => {
         port: 465,
         secure: true, // true for 465, false for other ports
         auth: { // 이메일을 보낼 계정 데이터 입력
-          user: '071215.joon@gmail.com',
-          pass: 'oyrkjaqftkagzgcz',
+          user: process.env.EMAIL_AUTHOR,
+          pass: process.env.EMAIL_PW,
         }
     });
     var spawn = require('child_process').spawn;
@@ -29,7 +39,7 @@ app.get('/verify', (req, res) => {
     result.stdout.on('data', function(data) {
         token = data;
         const emailOptions = { // 옵션값 설정
-            from: '071215.joon@gmail.com',
+            from: process.EMAIL_AUTHOR,
             to: email,
             subject: '오더콜 서비스 인증 이메일입니다.',
             html: '이메일 인증을 위해서는 아래의 URL을 클릭하여 주세요. '
