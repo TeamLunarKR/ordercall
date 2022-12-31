@@ -12,15 +12,12 @@ app.get('/register', (req, res) => {
 })
 
 app.get('/verify', (req, res) => {
+
     res.sendFile(__dirname+'/public/html/mailverify.html')
 })
 
 app.get('/login', (req, res) => {
     res.sendFile(__dirname+'/public/html/login.html')
-})
-
-app.get((req, res) => {
-    res.status(404).send('not found')
 })
 
 // API PAGE CODES 
@@ -47,6 +44,13 @@ app.get('/api/cru', (req, res) => {
         res.send(data.toString())
     })
 })
+
+
+
+app.get((req, res) => {
+    res.status(404).send('not found')
+})
+
 
 app.use(express.static('public'));
 
